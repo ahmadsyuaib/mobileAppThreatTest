@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">overlayApp</string>
-    <string name="accessibility_service_description">Detects app switches to show overlay</string>
-</resources>
