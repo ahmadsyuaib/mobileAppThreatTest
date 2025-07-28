@@ -8,6 +8,8 @@
 - Use 2 permissions which are: (tbc)
 - Other stuff
 - How to use: (tbe)
+- Control 1: Use setHideOverlayWindows() to prevent overlays
+- Control 2: Detect overlays and warn users
 
 ## Test 2: Mobile Application Sql Injection Attack
 
@@ -15,9 +17,17 @@
 - Used Node to host web server for api end point
 - Background: Mobile applications have input fields and may be vulnerable to SQL injections when there are databases involved.
 - Created a vulnerable login endpoint
-- Created a login endpoint with parameterisation [Controls]
-- Created a login endpoint with input validation (specifically email) [Controls]
+- Control 1: Created a login endpoint with parameterisation
+- Control 2: Created a login endpoint with input validation (specifically email)
 - Errors has custom pages (which is also a control)
+
+## Test 3: Mobile Application Packet Sniffing
+
+- Used okhttp3 to send HTTP requests to server
+- Used Wireshark to track packets through a single port getting HTTP and HTTPS
+- Used Node to host web server for api end point
+- Background: Malware mobile application may configure itself to use HTTP. This will allow attackers to be a MITM allowing them to sniff and get sensitive data from intercepting the packets transmitted.
+- Created two endpoints (one for HTTP and one for HTTPS)
 
 ## Things to do:
 
@@ -28,3 +38,5 @@
 - Include how-to-use for threat and control 2 (ip addr)
 - Clean up readme
 - Add apk (maybe, tbc)
+- Add pictures (maybe, tbc)
+- Add videos (maybe, tbc)
