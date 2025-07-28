@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LoginApp</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="login_http">Login via HTTP</string>
+    <string name="login_https">Login via HTTPS</string>
+    <string name="results_placeholder">Results will appear here...</string>
+    <string name="app_title">Login Test App</string>
+    <string name="enter_credentials">Please enter email and password</string>
+    <string name="request_failed">Request failed: %1$s</string>
+    <string name="login_attempted">%1$s login attempted</string>
+</resources>
