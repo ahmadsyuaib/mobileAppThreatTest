@@ -24,5 +24,7 @@
 - Upload control for threat 1
 - Include video demonstration for threat and control 1
 - Include video demonstration for threat and control 2
+- Include how-to-use for threat and control 1
+- Include how-to-use for threat and control 2 (ip addr)
 - Clean up readme
 - Add apk (maybe, tbc)
