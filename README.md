@@ -13,7 +13,7 @@
 
 ## Test 2: Mobile Application Sql Injection Attack
 
-- Used sql injection mobile app
+- Used sql injection mobile app (React Native)
 - Used Node to host web server for api end point
 - Background: Mobile applications have input fields and may be vulnerable to SQL injections when there are databases involved.
 - Created a vulnerable login endpoint
@@ -23,6 +23,7 @@
 
 ## Test 3: Mobile Application Packet Sniffing
 
+- Used simple login mobile app (coded Natively)
 - Used okhttp3 to send HTTP requests to server
 - Used Wireshark to track packets through a single port getting HTTP and HTTPS
 - Used Node to host web server for api end point
