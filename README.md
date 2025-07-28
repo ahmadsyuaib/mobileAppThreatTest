@@ -18,3 +18,11 @@
 - Created a login endpoint with parameterisation [Controls]
 - Created a login endpoint with input validation (specifically email) [Controls]
 - Errors has custom pages (which is also a control)
+
+## Things to do:
+
+- Upload control for threat 1
+- Include video demonstration for threat and control 1
+- Include video demonstration for threat and control 2
+- Clean up readme
+- Add apk (maybe, tbc)
