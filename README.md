@@ -62,7 +62,7 @@
   - If signed properly, it will show "Verifies"
   - If not signed properly, it will show "DOES NOT VERIFY"
 - Controls:
-  - Obsfucation
+  - Obsfucation (Done)
 
 ## Things to do:
 
