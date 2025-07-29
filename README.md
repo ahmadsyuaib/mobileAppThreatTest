@@ -30,14 +30,52 @@
 - Background: Malware mobile application may configure itself to use HTTP. This will allow attackers to be a MITM allowing them to sniff and get sensitive data from intercepting the packets transmitted.
 - Created two endpoints (one for HTTP and one for HTTPS)
 
+## Test 4: Modifying APK to change logic
+
+- Used apktool, uber-apk-signer
+- Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+- Steps to recreate Threat:
+  1. Extract the apk
+  2. Use apktool with the following command:
+     ```bash
+     apktool d original.apk -o output_dir
+     ```
+  3. Modify the smali files
+     - Navigate to the smali directory
+     - Find the target class files (lines 3475 and 3487)
+     - Edit the logic as needed (change eqz to nez)
+  4. Rebuild the APK
+     ```bash
+     apktool b output_dir -o modified.apk
+     ```
+  5. Sign the APK
+     - Generate keystore if needed
+     - Sign with uber-apk-signer.jar (Download the jar file [here](https://github.com/patrickfav/uber-apk-signer))
+     ```bash
+     java -jar uber-apk-signer.jar --apk modified.apk
+     ```
+     - Note: Using apksigner or jarsigner will only sign it with v1 signatures which is not compatible in newer android versions
+- Use apksigner to check whether apk is signed properly as follows:
+  ```bash
+  apksigner verify --verbose modified.apk
+  ```
+  - If signed properly, it will show "Verifies"
+  - If not signed properly, it will show "DOES NOT VERIFY"
+- Controls:
+  - Obsfucation
+
 ## Things to do:
 
-- Upload control for threat 1
-- Include video demonstration for threat and control 1
-- Include video demonstration for threat and control 2
-- Include how-to-use for threat and control 1
-- Include how-to-use for threat and control 2 (ip addr)
-- Clean up readme
-- Add apk (maybe, tbc)
-- Add pictures (maybe, tbc)
-- Add videos (maybe, tbc)
+- [ ] Upload control for threat 1
+- [ ] Include video demonstration for threat and control 1
+- [ ] Include video demonstration for threat and control 2
+- [ ] Include video demonstration for threat and control 3
+- [ ] Include video demonstration for threat and control 4
+- [ ] Include how-to-use for threat and control 1
+- [ ] Include how-to-use for threat and control 2 (ip addr)
+- [ ] Include how-to-use for threat and control 3 (ip addr)
+- [ ] Include how-to-use for threat and control 4
+- [ ] Clean up readme
+- [ ] Add apk (maybe, tbc)
+- [ ] Add pictures (maybe, tbc)
+- [ ] Add videos (maybe, tbc)
