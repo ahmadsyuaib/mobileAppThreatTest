@@ -67,6 +67,7 @@
 ## Things to do:
 
 - [ ] Upload control for threat 1
+- [ ] Edit threat 1 to take in target package name instead
 - [ ] Include video demonstration for threat and control 1
 - [ ] Include video demonstration for threat and control 2
 - [ ] Include video demonstration for threat and control 3
