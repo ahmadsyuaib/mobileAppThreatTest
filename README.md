@@ -1,5 +1,11 @@
 # Mobile Application Threat Testing
 
+### Introduction
+
+This repo is dedicated to the research potential threats to mobile ecosystem and the corresponding controls that can be implemented to mitigate the respective threats.
+
+# List of Threats and Corresponding Controls
+
 ## Test 1: Mobile Application Overlay Attack
 
 - Used overlayApp
@@ -63,6 +69,24 @@
   - If not signed properly, it will show "DOES NOT VERIFY"
 - Controls:
   - Obsfucation (Done)
+
+## Test 5: API Flooding to Web Server
+
+- Used Flask to host server
+- Used React Native's fetch api to send in request to local server
+- Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+- Steps to recreate threat:
+- Steps to run the server:
+  - Run:
+  ```bash
+  npm install flask
+  ```
+  - Run:
+  ```bash
+  python server.py // NOT python3
+  ```
+- Controls:
+  - tbc
 
 ## Things to do:
 
