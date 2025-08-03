@@ -15,127 +15,123 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 
 ### Pre-requisites (Tools used)
 
-- React Native
-- Node
-- Android Studio
-- apktool
-- Expo
+-   React Native
+-   Node
+-   Android Studio
+-   apktool
+-   Expo
+-   ipconfig
 
 # List of Threats and Corresponding Controls
 
 ## Test 1: Mobile Application Overlay Attack
 
-- Used overlayApp
-- Background: Malware mobile applications can use the SYSTEM_ALERT_WINDOW (SAW) android permission to create an overlay over other app mimicking to be that app. From here, they can pretend to be the login page and get the credentials from the user.
-- Created a native module for Android
-- Use 2 permissions which are: (tbc)
-- Other stuff
-- Steps to recreate the attack: (tbe)
-- Control 1: Use setHideOverlayWindows() to prevent overlays
-- ~~Control 2: Detect overlays and warn users~~
-- Click [here](overlayApp/README.md) for more details
+-   Issue ID: US01-MOBSF10
+-   Used overlayApp
+-   Background: Malware mobile applications can use the SYSTEM_ALERT_WINDOW (SAW) android permission to create an overlay over other app mimicking to be that app. From here, they can pretend to be the login page and get the credentials from the user.
+-   Created a native module for Android
+-   Use 2 permissions which are: (tbc)
+-   Other stuff
+-   Click [here](overlayApp/README.md) for more details
 
 ## Test 2: Mobile Application Sql Injection Attack
 
-- Used sql injection mobile app (React Native)
-- Used Node to host web server for api end point
-- Background: Mobile applications have input fields and may be vulnerable to SQL injections when there are databases involved.
-- Created a vulnerable login endpoint
-- Steps to recreate the attack:
-  - (tbe)
-- Control 1: Created a login endpoint with parameterisation
-- Control 2: Created a login endpoint with input validation (specifically email)
-- Errors has custom pages (which is also a control)
-- Click [here](sqlInjectionDemoUpdated/README.md) for more details
+-   Issue ID: US01-MOBSF05, US01-STRIDE02
+-   Used sql injection mobile app (React Native)
+-   Used Node to host web server for api end point
+-   Background: Mobile applications have input fields and may be vulnerable to SQL injections when there are databases involved.
+-   Created a vulnerable login endpoint
+-   Errors has custom pages (which is also a control)
+-   Click [here](sqlInjectionUpdated/README.md) for more details
 
 ## Test 3: Mobile Application Packet Sniffing
 
-- Used simple login mobile app (coded Natively)
-- Used okhttp3 to send HTTP requests to server
-- Used Wireshark to track packets through a single port getting HTTP and HTTPS
-- Used Node to host web server for api end point
-- Background: Malware mobile application may configure itself to use HTTP. This will allow attackers to be a MITM allowing them to sniff and get sensitive data from intercepting the packets transmitted.
-- Steps to recreate the attack:
-  - (tbe)
-- Created two endpoints (one for HTTP and one for HTTPS)
-- Click [here]() for more details
+-   Issue ID: US01-STRIDE07
+-   Used simple login mobile app (coded Natively)
+-   Used okhttp3 to send HTTP requests to server
+-   Used Wireshark to track packets through a single port getting HTTP and HTTPS
+-   Used Node to host web server for api end point
+-   Background: Malware mobile application may configure itself to use HTTP. This will allow attackers to be a MITM allowing them to sniff and get sensitive data from intercepting the packets transmitted.
+-   Steps to recreate the attack:
+    -   (tbe)
+-   Created two endpoints (one for HTTP and one for HTTPS)
+-   Click [here]() for more details
 
 ## Test 4: Modifying APK to change logic
 
-- Used apktool, uber-apk-signer
-- Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
-- Click [here](modifiedAPK/README.md) for more details
-- Steps to recreate Threat:
-  1. Extract the apk
-  2. Use apktool with the following command:
-     ```bash
-     apktool d original.apk -o output_dir
-     ```
-  3. Modify the smali files
-     - Navigate to the smali directory
-     - Find the target class files (lines 3475 and 3487)
-     - Edit the logic as needed (change eqz to nez)
-  4. Rebuild the APK
-     ```bash
-     apktool b output_dir -o modified.apk
-     ```
-  5. Sign the APK
-     - Generate keystore if needed
-     - Sign with uber-apk-signer.jar (Download the jar file [here](https://github.com/patrickfav/uber-apk-signer))
-     ```bash
-     java -jar uber-apk-signer.jar --apk modified.apk
-     ```
-     - Note: Using apksigner or jarsigner will only sign it with v1 signatures which is not compatible in newer android versions
-- Use apksigner to check whether apk is signed properly as follows:
-  ```bash
-  apksigner verify --verbose modified.apk
-  ```
-  - If signed properly, it will show "Verifies"
-  - If not signed properly, it will show "DOES NOT VERIFY"
-- Controls:
-  - Obsfucation (Done)
+-   Issue ID: NIL
+-   Used apktool, uber-apk-signer
+-   Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+-   Click [here](modifiedAPK/README.md) for more details
 
 ## Test 5: API Flooding to Web Server
 
-- Used Flask to host server
-- Used React Native's fetch api to send in request to local server
-- Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
-- Click [here](apiFlooding/README.md) for more details
-- Steps to recreate the attack:
-  - (tbe)
-- Steps to run the server:
-  - Run:
-  ```bash
-  npm install flask
-  ```
-  - Run:
-  ```bash
-  python server.py // NOT python3
-  ```
-- Controls:
-  - tbc
+-   Issue ID: US02-STRIDE02
+-   Used Flask to host server
+-   Used React Native's fetch api to send in request to local server
+-   Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+-   Click [here](apiFlooding/README.md) for more details
 
 ## Test 6: Tampering HTTP Header
 
-- Used Node to host server
-- Used React Native to create app
-- Background: Attacker can replace the host header in the request with their own URL. This allows the request made to be done in their own database instead of the original database.
-- Used Burpsuite to intercept and modify the http request
-- Click [here](tamperingHttpHeader/README.md) for more details
+-   Issue ID: US01-STRIDE05
+-   Used Node to host server
+-   Used React Native to create app
+-   Background: Attacker can replace the host header in the request with their own URL. This allows the request made to be done in their own database instead of the original database.
+-   Used Burpsuite to intercept and modify the http request
+-   Click [here](tamperingHttpHeader/README.md) for more details
 
-## Things to do:
+## Threats Summary Checklist
 
-- [ ] Upload control for threat 1
-- [ ] Edit threat 1 to take in target package name instead
-- [ ] Include video demonstration for threat and control 1
-- [ ] Include video demonstration for threat and control 2
-- [ ] Include video demonstration for threat and control 3
-- [ ] Include video demonstration for threat and control 4
-- [ ] Include how-to-use for threat and control 1
-- [ ] Include how-to-use for threat and control 2 (ip addr)
-- [ ] Include how-to-use for threat and control 3 (ip addr)
-- [ ] Include how-to-use for threat and control 4
-- [ ] Clean up readme
-- [ ] Add apk (maybe, tbc)
-- [ ] Add pictures (maybe, tbc)
-- [ ] Add videos (maybe, tbc)
+| Threat Code   |       Status       | Done by | Remarks              |
+| ------------- | :----------------: | ------- | -------------------- |
+| US01-MOBSF01  |        :x:         |         |                      |
+| US01-MOBSF02  |        :x:         |         |                      |
+| US01-MOBSF03  | :white_check_mark: | Nic     |                      |
+| US01-MOBSF04  | :heavy_minus_sign: | -       | FP                   |
+| US01-MOBSF05  | :white_check_mark: | ME      |                      |
+| US01-MOBSF06  | :heavy_minus_sign: | -       | FP                   |
+| US01-MOBSF07  | :heavy_minus_sign: | -       | FP                   |
+| US01-MOBSF08  |        :x:         |         |                      |
+| US01-MOBSF09  | :white_check_mark: | Nic     |                      |
+| US01-MOBSF10  | :white_check_mark: | ME      |                      |
+| US01-MOBSF11  | :white_check_mark: | Nic     |                      |
+| US01-STRIDE01 |        :x:         |         |                      |
+| US01-STRIDE02 | :white_check_mark: | ME      | Same as US01-MOBSF05 |
+| US01-STRIDE03 | :heavy_minus_sign: |         | NA                   |
+| US01-STRIDE04 |        :x:         |         |                      |
+| US01-STRIDE05 | :white_check_mark: | ME      |                      |
+| US01-STRIDE06 |        :x:         |         |                      |
+| US01-STRIDE07 | :white_check_mark: | ME      |                      |
+| US01-STRIDE08 |        :x:         |         |                      |
+| US02-STRIDE01 | :white_check_mark: | Nic     |                      |
+| US02-STRIDE02 | :white_check_mark: | ME      |                      |
+| US02-STRIDE03 |        :x:         |         |                      |
+| US02-STRIDE04 |        :x:         |         |                      |
+| US02-STRIDE05 |        :x:         |         |                      |
+| US02-STRIDE06 |        :x:         |         |                      |
+| US02-STRIDE07 |        :x:         |         |                      |
+| US02-STRIDE08 | :heavy_minus_sign: |         | NA                   |
+| US02-STRIDE09 | :heavy_minus_sign: |         | NA                   |
+| US02-STRIDE10 |        :x:         |         |                      |
+| US02-STRIDE11 |        :x:         |         |                      |
+| US02-STRIDE12 | :heavy_minus_sign: |         | NA                   |
+| US02-STRIDE13 |        :x:         |         |                      |
+| US02-STRIDE14 | :heavy_minus_sign: |         | NA                   |
+
+## Personal Things to do:
+
+-   [ ] Upload control for threat 1
+-   [ ] Edit threat 1 to take in target package name instead
+-   [ ] Include video demonstration for threat and control 1
+-   [ ] Include video demonstration for threat and control 2
+-   [ ] Include video demonstration for threat and control 3
+-   [ ] Include video demonstration for threat and control 4
+-   [ ] Include how-to-use for threat and control 1
+-   [ ] Include how-to-use for threat and control 2 (ip addr)
+-   [ ] Include how-to-use for threat and control 3 (ip addr)
+-   [ ] Include how-to-use for threat and control 4
+-   [ ] Clean up readme
+-   [ ] Add apk (maybe, tbc)
+-   [ ] Add pictures (maybe, tbc)
+-   [ ] Add videos (maybe, tbc)
