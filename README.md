@@ -4,6 +4,14 @@
 
 This repo is dedicated to the research potential threats to mobile ecosystem and the corresponding controls that can be implemented to mitigate the respective threats.
 
+### Pre-requisites (Tools used)
+
+- React Native
+- Node
+- Android Studio
+- apktool
+- Expo
+
 # List of Threats and Corresponding Controls
 
 ## Test 1: Mobile Application Overlay Attack
@@ -16,6 +24,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Steps to recreate the attack: (tbe)
 - Control 1: Use setHideOverlayWindows() to prevent overlays
 - ~~Control 2: Detect overlays and warn users~~
+- Click [here]() for more details
 
 ## Test 2: Mobile Application Sql Injection Attack
 
@@ -28,6 +37,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Control 1: Created a login endpoint with parameterisation
 - Control 2: Created a login endpoint with input validation (specifically email)
 - Errors has custom pages (which is also a control)
+- Click [here]() for more details
 
 ## Test 3: Mobile Application Packet Sniffing
 
@@ -39,11 +49,13 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Steps to recreate the attack:
   - (tbe)
 - Created two endpoints (one for HTTP and one for HTTPS)
+- Click [here]() for more details
 
 ## Test 4: Modifying APK to change logic
 
 - Used apktool, uber-apk-signer
 - Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+- Click [here]() for more details
 - Steps to recreate Threat:
   1. Extract the apk
   2. Use apktool with the following command:
@@ -79,6 +91,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Used Flask to host server
 - Used React Native's fetch api to send in request to local server
 - Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
+- Click [here]() for more details
 - Steps to recreate the attack:
   - (tbe)
 - Steps to run the server:
@@ -99,47 +112,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Used React Native to create app
 - Background: Attacker can replace the host header in the request with their own URL. This allows the request made to be done in their own database instead of the original database.
 - Used Burpsuite to intercept and modify the http request
-- Steps to recreate the attack:
-  - Server-side
-    - Copy `server.js` and `package.json` into the backend directory
-    - Run `"npm install"` to initialise server
-    - Start the server:
-      ```bash
-      npm start
-      ```
-  - Client-side
-    - Initialise React Native expo:
-      ```bash
-      expo init <directory name>
-      ```
-    - Replace `App.js` with the `App.js` in the repo
-    - Start the app on expo:
-      ```bash
-      npx expo start -c
-      ```
-    - In the app:
-      - Create 2 databases (One good and one evil)
-      - Use local ip address (get from `ipconfig`)
-  - Android Studio
-    - Open Extended controls (3 dots) > "Settings" > "Proxy"
-    - Set "Manual Proxy Configuration"
-      - Set hostname to local ip address (same as above)
-      - Set port to `8080`
-      - Click apply (Ensure proxy status is "success")
-  - Burpsuite
-    - Under "Proxy" tab, open "Proxy settings"
-      - Under "Proxy listeners", select the listener and then click "Edit"
-      - Set "Bind to port" to `8080`
-      - Set "Bind to address" to `All interfaces`
-      - Click "OK" and return to main screen
-    - Set `Intercept on`
-  - Send in a username and password
-  - Return to burpsuite
-  - Modify the host header to the attacker's database (evil database)
-  - [insert picture of burpsuite here]
-  - Attacker's database should get the credentials
-- Control:
-  - Use HTTPS to encrypt request
+- Click [here](tamperingHttpHeader/README.md) for more details
 
 ## Things to do:
 
