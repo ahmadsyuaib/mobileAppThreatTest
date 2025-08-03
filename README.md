@@ -107,11 +107,6 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US01-STRIDE08 |        :x:         |         |                      |
 | US02-STRIDE01 | :white_check_mark: | Nic     |                      |
 | US02-STRIDE02 | :white_check_mark: | ME      | No proof it works    |
-| US02-STRIDE03 |        :x:         |         |                      |
-| US02-STRIDE04 |        :x:         |         |                      |
-| US02-STRIDE05 |        :x:         |         |                      |
-| US02-STRIDE06 |        :x:         |         |                      |
-| US02-STRIDE07 |        :x:         |         |                      |
 | US02-STRIDE08 | :heavy_minus_sign: |         | NA                   |
 | US02-STRIDE09 | :heavy_minus_sign: |         | NA                   |
 | US02-STRIDE10 |        :x:         |         |                      |
