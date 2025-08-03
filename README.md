@@ -1,13 +1,11 @@
 # Mobile Application Threat Testing
 
 ```
-MMMMMMMM  MMMMMMMM   OOOOOOOOOOOO  BBBBBBBBBBBB   IIIIIIIIII  LLL           EEEEEEEEEEEE          TTTTTTTTTT  HHH    HHH  RRRRRRRRRR  EEEEEEEEEEEE   AAAAAAAAAA  TTTTTTTTTT  SSSSSSSSSS
-MMMMMMMM  MMMMMMMM  OOOOOOOOOOOOOO BBBBBBBBBBBBB      III     LLL           EEEEEEEEEEEE              TTTT    HHH    HHH  RRRRRRRRRRR EEEEEEEEEEEE   AAAAAAAAAA     TTTT     SSSSSSSSSS
-MMMM MMMM MMMM MMM  OOOO      OOOO BBBB     BBBBB     III     LLL           EEE                     TTTT      HHH    HHH  RRRR   RRRR  EEE           AAAA  AAAAA     TTTT     SSS
-MMM   MMMM   MMMM   OOOO      OOOO BBBBBBBBBBBBB      III     LLL           EEEEEEEEEEEE          TTTT        HHHHHHHHHH  RRRRRRRRRR  EEEEEEEEEEEE   AAAAAAAAAA     TTTT     SSSSSSSSSS
-MMM    MMM    MMM    OOOO      OOOO BBBB     BBBBB     III     LLL           EEE                  TTTT         HHH    HHH  RRRR RRRR   EEE           AAA    AAAA     TTTT          SSSSS
-MMM           MMM    OOOOOOOOOOOOOO BBBBBBBBBBBBB  IIIIIIIIII  LLLLLLLLLLLL  EEEEEEEEEEEE        TTTTTTTT      HHH    HHH  RRRR  RRRR  EEEEEEEEEEEE   AAA    AAAA     TTTTTTTT  SSSSSSSSSS
-MMM           MMM     OOOOOOOOOOOO  BBBBBBBBBBBB   IIIIIIIIII  LLLLLLLLLLLL  EEEEEEEEEEEE        TTTTTTTT      HHH    HHH  RRRR   RRRR EEEEEEEEEEEE   AAA    AAAA     TTTTTTTT  SSSSSSSSSS
+ __  __  ___  ____ ___ _     _____   _____ _   _ ____  _____    _  _____ ____
+|  \/  |/ _ \| __ )_ _| |   | ____| |_   _| | | |  _ \| ____|  / \|_   _/ ___|
+| |\/| | | | |  _ \| || |   |  _|     | | | |_| | |_) |  _|   / _ \ | | \___ \
+| |  | | |_| | |_) | || |___| |___    | | |  _  |  _ <| |___ / ___ \| |  ___) |
+|_|  |_|\___/|____/___|_____|_____|   |_| |_| |_|_| \_\_____/_/   \_\_| |____/
 
 ```
 
