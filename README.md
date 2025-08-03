@@ -24,7 +24,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Steps to recreate the attack: (tbe)
 - Control 1: Use setHideOverlayWindows() to prevent overlays
 - ~~Control 2: Detect overlays and warn users~~
-- Click [here]() for more details
+- Click [here](overlayApp/README.md) for more details
 
 ## Test 2: Mobile Application Sql Injection Attack
 
@@ -37,7 +37,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Control 1: Created a login endpoint with parameterisation
 - Control 2: Created a login endpoint with input validation (specifically email)
 - Errors has custom pages (which is also a control)
-- Click [here]() for more details
+- Click [here](sqlInjectionDemoUpdated/README.md) for more details
 
 ## Test 3: Mobile Application Packet Sniffing
 
@@ -55,7 +55,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 
 - Used apktool, uber-apk-signer
 - Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
-- Click [here]() for more details
+- Click [here](modifiedAPK/README.md) for more details
 - Steps to recreate Threat:
   1. Extract the apk
   2. Use apktool with the following command:
@@ -91,7 +91,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 - Used Flask to host server
 - Used React Native's fetch api to send in request to local server
 - Background: Attacker can extract the apk, decompile it and modify the apk to create a modifed version.
-- Click [here]() for more details
+- Click [here](apiFlooding/README.md) for more details
 - Steps to recreate the attack:
   - (tbe)
 - Steps to run the server:
