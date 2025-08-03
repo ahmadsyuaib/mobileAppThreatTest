@@ -56,7 +56,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   Steps to recreate the attack:
     -   (tbe)
 -   Created two endpoints (one for HTTP and one for HTTPS)
--   Click [here]() for more details
+-   Click [here](packetSniff/README.md) for more details
 
 ## Test 4: Modifying APK to change logic
 
