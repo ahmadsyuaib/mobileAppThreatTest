@@ -87,17 +87,17 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | Threat Code   |       Status       | Done by | Remarks              |
 | ------------- | :----------------: | ------- | -------------------- |
 | US01-MOBSF01  |        :x:         |         |                      |
-| US01-MOBSF02  |        :x:         |         |                      |
+| US01-MOBSF02  |        :x:         |         | NIC                  |
 | US01-MOBSF03  | :white_check_mark: | Nic     |                      |
 | US01-MOBSF04  | :heavy_minus_sign: | -       | FP                   |
 | US01-MOBSF05  | :white_check_mark: | ME      |                      |
 | US01-MOBSF06  | :heavy_minus_sign: | -       | FP                   |
 | US01-MOBSF07  | :heavy_minus_sign: | -       | FP                   |
-| US01-MOBSF08  |        :x:         |         |                      |
+| US01-MOBSF08  |        :x:         |         | NIC                  |
 | US01-MOBSF09  | :white_check_mark: | Nic     |                      |
 | US01-MOBSF10  | :white_check_mark: | ME      |                      |
 | US01-MOBSF11  | :white_check_mark: | Nic     |                      |
-| US01-STRIDE01 |        :x:         |         |                      |
+| US01-STRIDE01 |        :x:         |         | NIC                  |
 | US01-STRIDE02 | :white_check_mark: | ME      | Same as US01-MOBSF05 |
 | US01-STRIDE03 | :heavy_minus_sign: |         | NA                   |
 | US01-STRIDE04 |        :x:         |         |                      |
@@ -109,7 +109,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US02-STRIDE02 | :white_check_mark: | ME      | No proof it works    |
 | US02-STRIDE08 | :heavy_minus_sign: |         | NA                   |
 | US02-STRIDE09 | :heavy_minus_sign: |         | NA                   |
-| US02-STRIDE10 |        :x:         |         |                      |
+| US02-STRIDE10 |        :x:         |         | NIC                  |
 | US02-STRIDE11 |        :x:         |         |                      |
 | US02-STRIDE12 | :heavy_minus_sign: |         | NA                   |
 | US02-STRIDE13 |        :x:         |         |                      |
