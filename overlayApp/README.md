@@ -1,6 +1,6 @@
 # Overlay Attack
 
-## Steps to recreate the attack:
+## Steps to recreate threat
 
 -
 
@@ -10,6 +10,6 @@
 
 -
 
-### Control 2: ~~Control 2: Detect overlays and warn users~~
+### Control 2: ~~Detect overlays and warn users~~
 
 -

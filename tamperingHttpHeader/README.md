@@ -1,6 +1,6 @@
 # Tampering HTTP Headers
 
-## Steps to recreate the attack:
+## Steps to recreate threat
 
 -   Server-side
     -   Copy `server.js` and `package.json` into the backend directory
@@ -41,7 +41,7 @@
 -   [insert picture of burpsuite here]
 -   Attacker's database should get the credentials
 
-## Steps to recreate the controls
+## Steps to recreate controls
 
 ### Control 3: Use HTTPS to encrypt request
 

@@ -21,6 +21,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   apktool
 -   Expo
 -   ipconfig
+-   OpenSSL
 
 # List of Threats and Corresponding Controls
 
@@ -105,7 +106,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US01-STRIDE07 | :white_check_mark: | ME      |                      |
 | US01-STRIDE08 |        :x:         |         |                      |
 | US02-STRIDE01 | :white_check_mark: | Nic     |                      |
-| US02-STRIDE02 | :white_check_mark: | ME      |                      |
+| US02-STRIDE02 | :white_check_mark: | ME      | No proof it works    |
 | US02-STRIDE03 |        :x:         |         |                      |
 | US02-STRIDE04 |        :x:         |         |                      |
 | US02-STRIDE05 |        :x:         |         |                      |
@@ -127,11 +128,8 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   [ ] Include video demonstration for threat and control 2
 -   [ ] Include video demonstration for threat and control 3
 -   [ ] Include video demonstration for threat and control 4
--   [ ] Include how-to-use for threat and control 1
--   [ ] Include how-to-use for threat and control 2 (ip addr)
--   [ ] Include how-to-use for threat and control 3 (ip addr)
--   [ ] Include how-to-use for threat and control 4
--   [ ] Clean up readme
+-   [ ] Include how-to-use for threat and control
+-   [x] Clean up readme
 -   [ ] Add apk (maybe, tbc)
--   [ ] Add pictures (maybe, tbc)
+-   [ ] Add pictures in individual README (maybe, tbc)
 -   [ ] Add videos (maybe, tbc)

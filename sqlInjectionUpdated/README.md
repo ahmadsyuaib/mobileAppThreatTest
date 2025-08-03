@@ -1,6 +1,6 @@
 # SQL Injection
 
-## Steps to recreate the attack:
+## Steps to recreate threat
 
 -   Server-side
     -   Copy `server.js` to a folder

@@ -1,6 +1,6 @@
 # Modified APK
 
-## Steps to recreate Threat
+## Steps to recreate threat
 
 1. Extract the apk
 2. Use apktool with the following command:

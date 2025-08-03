@@ -3,7 +3,7 @@
 -   This demo is not completed yet
 -   To be filled up
 
-## Steps to recreate the attack
+## Steps to recreate threat
 
 -   Steps to run the server:
     -   Run:
