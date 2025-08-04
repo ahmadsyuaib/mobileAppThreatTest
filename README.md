@@ -86,7 +86,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 
 | Threat Code   |       Status       | Done by | Remarks              |
 | ------------- | :----------------: | ------- | -------------------- |
-| US01-MOBSF01  |        :x:         |         |                      |
+| US01-MOBSF01  |        :x:         |         | Android version      |
 | US01-MOBSF02  |        :x:         |         | NIC                  |
 | US01-MOBSF03  | :white_check_mark: | Nic     |                      |
 | US01-MOBSF04  | :heavy_minus_sign: | -       | FP                   |
@@ -100,11 +100,11 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US01-STRIDE01 |        :x:         |         | NIC                  |
 | US01-STRIDE02 | :white_check_mark: | ME      | Same as US01-MOBSF05 |
 | US01-STRIDE03 | :heavy_minus_sign: |         | NA                   |
-| US01-STRIDE04 |        :x:         |         |                      |
+| US01-STRIDE04 |        :x:         |         | How to show this?    |
 | US01-STRIDE05 | :white_check_mark: | ME      |                      |
-| US01-STRIDE06 |        :x:         |         |                      |
+| US01-STRIDE06 |        :x:         |         | How to show this?    |
 | US01-STRIDE07 | :white_check_mark: | ME      |                      |
-| US01-STRIDE08 |        :x:         |         |                      |
+| US01-STRIDE08 |        :x:         |         | How to show this?    |
 | US02-STRIDE01 | :white_check_mark: | Nic     |                      |
 | US02-STRIDE02 | :white_check_mark: | ME      | No proof it works    |
 | US02-STRIDE08 | :heavy_minus_sign: |         | NA                   |
