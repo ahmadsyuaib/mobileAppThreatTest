@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">bruteForceApp</string>
+    <string name="accessibility_service_description">Research tool for studying AccessibilityService security implications. This service monitors the target login app (com.example.loginapp) and can perform automated login attempts for authorized penetration testing and security research purposes only. Use only in controlled environments with proper authorization.</string>
+</resources>
