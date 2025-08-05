@@ -87,7 +87,13 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   Issue ID: US02-STRIDE13
 -   Used Node to host server
 -   Background: Attacker can inject a overly large access/refresh token, causing app crash when inserting the jwt token into the local SQL database (tested that it will crash above 6MB)
-    -Click [here](crashAppStorage/README.md) for more details
+-   Click [here](crashAppStorage/README.md) for more details
+
+## Test 8: Leaked claim (e.g. email, username)
+
+-   Issue ID: US01-STRIDE01
+-   Background: Attacker gets an email from a data breach and have the list of users from a database, allowing the attacker to pretend to be the user. Hence, a password is needed to verify an identity.
+-   Click [here](emailVerification/README.md) for more details
 
 ## Threats Summary Checklist
 
@@ -104,7 +110,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US01-MOBSF09  | :white_check_mark: | Nic     |                        |
 | US01-MOBSF10  | :white_check_mark: | ME      |                        |
 | US01-MOBSF11  | :white_check_mark: | Nic     |                        |
-| US01-STRIDE01 |        :x:         |         |                        |
+| US01-STRIDE01 | :white_check_mark: | ME      |                        |
 | US01-STRIDE02 | :white_check_mark: | ME      |                        |
 | US01-STRIDE03 | :heavy_minus_sign: |         | NA                     |
 | US01-STRIDE04 |        :x:         |         | How to show this?      |
