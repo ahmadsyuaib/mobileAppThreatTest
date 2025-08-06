@@ -43,6 +43,6 @@
 
 ## Steps to recreate controls
 
-### Control 3: Use HTTPS to encrypt request
+### Control 1: Use HTTPS to encrypt request
 
 -   Use HTTPS to encrypt request
