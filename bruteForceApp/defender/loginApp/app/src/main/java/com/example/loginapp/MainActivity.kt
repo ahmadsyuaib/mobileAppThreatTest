@@ -28,21 +28,31 @@ class MainActivity : ComponentActivity() {
         setContent {
             LoginAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    LoginScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    AppContent(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
 
+// ✅ New composable to hold overall app logic
+@Composable
+fun AppContent(modifier: Modifier = Modifier) {
+    var isLoggedIn by remember { mutableStateOf(false) }
+
+    if (isLoggedIn) {
+        SuccessScreen(onLogout = { isLoggedIn = false }, modifier = modifier)
+    } else {
+        LoginScreen(onLoginSuccess = { isLoggedIn = true }, modifier = modifier)
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(onLoginSuccess: () -> Unit, modifier: Modifier = Modifier) {
     var ipAddress by remember { mutableStateOf("127.0.0.1:5000") }
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("test") }
+    var password by remember { mutableStateOf("123456") }
     var loginResult by remember { mutableStateOf("") }
     var isLoading by remember { mutableStateOf(false) }
 
@@ -88,8 +98,13 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             onClick = {
                 coroutineScope.launch {
                     isLoading = true
-                    loginResult = performLogin(client, ipAddress, username, password)
+                    val result = performLogin(client, ipAddress, username, password)
                     isLoading = false
+                    if (result.contains("Success", ignoreCase = true)) {
+                        onLoginSuccess() // ✅ Go to success screen
+                    } else {
+                        loginResult = result
+                    }
                 }
             },
             enabled = !isLoading,
@@ -110,6 +125,19 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 color = if (loginResult.contains("Success")) MaterialTheme.colorScheme.primary
                 else MaterialTheme.colorScheme.error
             )
+        }
+    }
+}
+
+// ✅ New composable for the success screen
+@Composable
+fun SuccessScreen(onLogout: () -> Unit, modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Button(onClick = onLogout) {
+            Text("Logout")
         }
     }
 }

