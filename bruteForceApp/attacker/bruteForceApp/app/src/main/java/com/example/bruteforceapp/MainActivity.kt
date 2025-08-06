@@ -1,206 +1,117 @@
 package com.example.bruteforceapp
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.bruteforceapp.ui.theme.AccessibilityTestTheme
 
 class MainActivity : ComponentActivity() {
-    private lateinit var sharedPrefs: SharedPreferences
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-
-        sharedPrefs = getSharedPreferences("attack_control", Context.MODE_PRIVATE)
-
         setContent {
-            AccessibilityTestTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MainScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        onStartAttack = { startAttack() },
-                        onStopAttack = { stopAttack() },
-                        onOpenSettings = { openAccessibilitySettings() }
-                    )
-                }
+            MaterialTheme {
+                BruteForceScreen()
             }
         }
-    }
-
-    private fun startAttack() {
-        // Set attack state in SharedPreferences
-        sharedPrefs.edit().putBoolean("attack_active", true).apply()
-
-        // Send broadcast to start attack
-        val intent = Intent("com.example.bruteforceapp.START_ATTACK")
-        sendBroadcast(intent)
-    }
-
-    private fun stopAttack() {
-        // Set attack state in SharedPreferences
-        sharedPrefs.edit().putBoolean("attack_active", false).apply()
-
-        // Send broadcast to stop attack
-        val intent = Intent("com.example.bruteforceapp.STOP_ATTACK")
-        sendBroadcast(intent)
-    }
-
-    private fun openAccessibilitySettings() {
-        val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-        startActivity(intent)
     }
 }
 
 @Composable
-fun MainScreen(
-    modifier: Modifier = Modifier,
-    onStartAttack: () -> Unit,
-    onStopAttack: () -> Unit,
-    onOpenSettings: () -> Unit
-) {
-    var attemptCount by remember { mutableIntStateOf(0) }
-    var isAttackActive by remember { mutableStateOf(false) }
+fun BruteForceScreen() {
+    val context = LocalContext.current
 
     Column(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.Center
     ) {
-        // Title
         Text(
-            text = "AccessibilityService Research Tool",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            text = "Automated Brute Force",
+            style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.error
         )
 
-        Text(
-            text = "For Security Research & Penetration Testing",
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        Spacer(modifier = Modifier.height(32.dp))
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Status Card
         Card(
             modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = if (isAttackActive)
-                    MaterialTheme.colorScheme.errorContainer
-                else
-                    MaterialTheme.colorScheme.surfaceVariant
-            ),
-            shape = RoundedCornerShape(12.dp)
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
         ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            Column(modifier = Modifier.padding(24.dp)) {
                 Text(
-                    text = "Status: ${if (isAttackActive) "ACTIVE" else "STOPPED"}",
-                    fontWeight = FontWeight.Bold,
-                    color = if (isAttackActive)
-                        MaterialTheme.colorScheme.onErrorContainer
-                    else
-                        MaterialTheme.colorScheme.onSurfaceVariant
+                    text = "Target Configuration",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(bottom = 8.dp)
                 )
+                Text("Server: 10.0.2.2:5000", style = MaterialTheme.typography.bodyMedium)
+                Text("Username: admin", style = MaterialTheme.typography.bodyMedium)
+                Text("Passwords: 5 hardcoded variants", style = MaterialTheme.typography.bodyMedium)
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Attempts: $attemptCount",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Medium,
-                    color = if (isAttackActive)
-                        MaterialTheme.colorScheme.onErrorContainer
-                    else
-                        MaterialTheme.colorScheme.onSurfaceVariant
+                    text = "Features:",
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(bottom = 4.dp)
                 )
+                Text("• Auto-stops on successful login", style = MaterialTheme.typography.bodySmall)
+                Text("• Real-time success detection", style = MaterialTheme.typography.bodySmall)
+                Text("• Automatic keyboard dismissal", style = MaterialTheme.typography.bodySmall)
+                Text("• Progress logging", style = MaterialTheme.typography.bodySmall)
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
-        // Control Buttons
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Button(
-                onClick = {
-                    onStartAttack()
-                    isAttackActive = true
-                },
-                modifier = Modifier.weight(1f),
-                enabled = !isAttackActive,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                )
-            ) {
-                Text("START")
-            }
+        Button(
+            onClick = {
+                if (AutoFillAccessibilityService.instance == null) {
+                    Toast.makeText(context, "Please enable accessibility service first", Toast.LENGTH_LONG).show()
+                    val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+                    context.startActivity(intent)
+                } else {
+                    Toast.makeText(context, "Starting automated brute force attack...", Toast.LENGTH_SHORT).show()
 
-            Button(
-                onClick = {
-                    onStopAttack()
-                    isAttackActive = false
-                },
-                modifier = Modifier.weight(1f),
-                enabled = isAttackActive,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
-            ) {
-                Text("STOP")
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // Settings Button
-        OutlinedButton(
-            onClick = onOpenSettings,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Open Accessibility Settings")
-        }
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // Warning Text
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                    val intent = Intent(context, AutoFillAccessibilityService::class.java)
+                    intent.action = AutoFillAccessibilityService.ACTION_START_BRUTEFORCE
+                    context.startService(intent)
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.error
             )
         ) {
             Text(
-                text = "⚠️ This tool is for authorized security research only. " +
-                        "Target app: com.example.loginapp\n" +
-                        "Password field: com.example.loginapp:id/password\n" +
-                        "Login button: Login\n" +
-                        "Result field: com.example.loginapp:id/loginResult",
-                modifier = Modifier.padding(16.dp),
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onTertiaryContainer
+                text = if (AutoFillAccessibilityService.instance == null) "Enable Accessibility Service" else "START BRUTE FORCE",
+                style = MaterialTheme.typography.titleMedium
             )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text("⚠️ WARNING", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.error)
+                Text("This tool is for authorized security testing only!", style = MaterialTheme.typography.bodySmall)
+                Text("Monitor LogCat for real-time progress and results.", style = MaterialTheme.typography.bodySmall)
+            }
         }
     }
 }

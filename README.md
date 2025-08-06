@@ -95,6 +95,10 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   Background: Attacker gets an email from a data breach and have the list of users from a database, allowing the attacker to pretend to be the user. Hence, a password is needed to verify an identity.
 -   Click [here](emailVerification/README.md) for more details
 
+## Test 9: Bruteforcing App Login
+
+-   Issue ID: US01-STRIDE08
+
 ## Threats Summary Checklist
 
 | Threat Code   |       Status       | Done by | Remarks                |
@@ -117,7 +121,7 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 | US01-STRIDE05 | :white_check_mark: | ME      |                        |
 | US01-STRIDE06 |        :x:         |         | How to show this?      |
 | US01-STRIDE07 | :white_check_mark: | ME      |                        |
-| US01-STRIDE08 |        :x:         |         | How to show this?      |
+| US01-STRIDE08 | :white_check_mark: | ME      |                        |
 | US02-STRIDE01 | :white_check_mark: | Nic     |                        |
 | US02-STRIDE02 | :white_check_mark: | ME      | No proof it works      |
 | US02-STRIDE08 | :heavy_minus_sign: |         | NA                     |
