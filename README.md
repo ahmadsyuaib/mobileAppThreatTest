@@ -98,6 +98,8 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 ## Test 9: Bruteforcing App Login
 
 -   Issue ID: US01-STRIDE08
+-   Background: Attacker can bruteforce login page of an application allowing it to test a list of passwords.
+-   Click [here](bruteForceApp/README.md) for more details
 
 ## Threats Summary Checklist
 
