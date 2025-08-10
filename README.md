@@ -101,44 +101,38 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   Background: Attacker can bruteforce login page of an application allowing it to test a list of passwords.
 -   Click [here](bruteForceApp/README.md) for more details
 
-## Test 10: Local Android SQL Injection
+## Threats Summary Checklist
 
--   Issue ID: US01-MOBSF05
--   Background: Some app uses local sql database. If SQL query is executed raw, SQL injection can occur.
--   Click [here](localAndroidSqlInjection/README.md) for more details
-
-## Threats Summary Checklist (❌✅➖)
-
-| Threat Code   |       Status       | Done by | Remarks                | Documentation | Done?                                |
-| ------------- | :----------------: | ------- | ---------------------- | ------------- | ------------------------------------ |
-| US01-MOBSF01  |        :x:         |         | Android version        | Nic           |                                      |
-| US01-MOBSF02  |        :x:         |         | NIC                    | Nic           |                                      |
-| US01-MOBSF03  | :white_check_mark: | Nic     |                        | Nic           |                                      |
-| US01-MOBSF04  | :heavy_minus_sign: | -       | FP                     | -             | -                                    |
-| US01-MOBSF05  |        :x:         |         | Redo to local database |               | no but im supposed to do lol try try |
-| US01-MOBSF06  | :heavy_minus_sign: | -       | P                      | -             | -                                    |
-| US01-MOBSF07  | :heavy_minus_sign: | -       | FP                     | -             | -                                    |
-| US01-MOBSF08  |        :x:         |         | NIC                    | Nic           |                                      |
-| US01-MOBSF09  | :white_check_mark: | Nic     |                        | Nic           |                                      |
-| US01-MOBSF10  | :white_check_mark: | ME      |                        | Me            |                                      |
-| US01-MOBSF11  | :white_check_mark: | Nic     |                        | Nic           |                                      |
-| US01-STRIDE01 | :white_check_mark: | ME      |                        | Me            | yes                                  |
-| US01-STRIDE02 | :white_check_mark: | ME      |                        | Me            | yes                                  |
-| US01-STRIDE03 | :heavy_minus_sign: |         | NA                     | -             | -                                    |
-| US01-STRIDE04 |        :x:         |         | How to show this?      | HTTPS         | yes                                  |
-| US01-STRIDE05 | :white_check_mark: | ME      |                        | Me            | tgt wif 04                           |
-| US01-STRIDE06 |        :x:         |         | How to show this?      | HTTPS         | tgt wif 06                           |
-| US01-STRIDE07 | :white_check_mark: | ME      |                        | Me            | tgt wif 07                           |
-| US01-STRIDE08 | :white_check_mark: | ME      |                        | Me            | yes                                  |
-| US02-STRIDE01 | :white_check_mark: | Nic     |                        | Nic           |                                      |
-| US02-STRIDE02 | :white_check_mark: | ME      | No proof it works      | Me            | yes                                  |
-| US02-STRIDE08 | :heavy_minus_sign: |         | NA                     | -             | -                                    |
-| US02-STRIDE09 | :heavy_minus_sign: |         | NA                     | -             | -                                    |
-| US02-STRIDE10 |        :x:         |         | NIC                    | Nic           |                                      |
-| U002-STRIDE11 |        :x:         |         |                        | Nic           |                                      |
-| US02-STRIDE12 | :heavy_minus_sign: |         | NA                     | -             | -                                    |
-| US02-STRIDE13 | :white_check_mark: | ME      | Implement control      | Me            | Havent implement control             |
-| US02-STRIDE14 | :heavy_minus_sign: |         | NA                     | -             | -                                    |
+| Threat Code   |       Status       | Done by | Remarks                | Documentation |
+| ------------- | :----------------: | ------- | ---------------------- | ------------- |
+| US01-MOBSF01  |        :x:         |         | Android version        | Nic           |
+| US01-MOBSF02  |        :x:         |         | NIC                    | Nic           |
+| US01-MOBSF03  | :white_check_mark: | Nic     |                        | Nic           |
+| US01-MOBSF04  | :heavy_minus_sign: | -       | FP                     | -             |
+| US01-MOBSF05  |        :x:         |         | Redo to local database | Nic           |
+| US01-MOBSF06  | :heavy_minus_sign: | -       | FP                     | -             |
+| US01-MOBSF07  | :heavy_minus_sign: | -       | FP                     | -             |
+| US01-MOBSF08  |        :x:         |         | NIC                    | Nic           |
+| US01-MOBSF09  | :white_check_mark: | Nic     |                        | Nic           |
+| US01-MOBSF10  | :white_check_mark: | ME      |                        | Me            |
+| US01-MOBSF11  | :white_check_mark: | Nic     |                        | Nic           |
+| US01-STRIDE01 | :white_check_mark: | ME      |                        | Me            |
+| US01-STRIDE02 | :white_check_mark: | ME      |                        | Me            |
+| US01-STRIDE03 | :heavy_minus_sign: |         | NA                     | -             |
+| US01-STRIDE04 |        :x:         |         | How to show this?      | HTTPS         |
+| US01-STRIDE05 | :white_check_mark: | ME      |                        | Me            |
+| US01-STRIDE06 |        :x:         |         | How to show this?      | HTTPS         |
+| US01-STRIDE07 | :white_check_mark: | ME      |                        | Me            |
+| US01-STRIDE08 | :white_check_mark: | ME      |                        | Me            |
+| US02-STRIDE01 | :white_check_mark: | Nic     |                        | Nic           |
+| US02-STRIDE02 | :white_check_mark: | ME      | No proof it works      | Me            |
+| US02-STRIDE08 | :heavy_minus_sign: |         | NA                     | -             |
+| US02-STRIDE09 | :heavy_minus_sign: |         | NA                     | -             |
+| US02-STRIDE10 |        :x:         |         | NIC                    | Nic           |
+| US02-STRIDE11 |        :x:         |         |                        | Nic           |
+| US02-STRIDE12 | :heavy_minus_sign: |         | NA                     | -             |
+| US02-STRIDE13 | :white_check_mark: |         | Implement control      | Nic           |
+| US02-STRIDE14 | :heavy_minus_sign: |         | NA                     | -             |
 
 ## Personal Things to do:
 
