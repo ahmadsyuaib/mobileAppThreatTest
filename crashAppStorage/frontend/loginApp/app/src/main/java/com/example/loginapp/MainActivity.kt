@@ -1,6 +1,7 @@
 package com.example.loginapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnLargeToken: Button
+    private lateinit var btnLargeTokenSecure: Button
     private lateinit var tvStatus: TextView
 
     private lateinit var database: AppDatabase
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
         btnLargeToken = findViewById(R.id.btnLargeToken)
+        btnLargeTokenSecure = findViewById(R.id.btnLargeTokenSecure)
         tvStatus = findViewById(R.id.tvStatus)
 
         // Set default values
@@ -70,6 +73,10 @@ class MainActivity : AppCompatActivity() {
         btnLargeToken.setOnClickListener {
             performLargeTokenLogin()
         }
+
+        btnLargeTokenSecure.setOnClickListener {
+            performLargeTokenLoginSecure()
+        }
     }
 
     private fun performLogin() {
@@ -85,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         tvStatus.text = "Logging in..."
         btnLogin.isEnabled = false
         btnLargeToken.isEnabled = false
+        btnLargeTokenSecure.isEnabled = false
 
         lifecycleScope.launch {
             try {
@@ -107,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             } finally {
                 btnLogin.isEnabled = true
                 btnLargeToken.isEnabled = true
+                btnLargeTokenSecure.isEnabled = true
             }
         }
     }
@@ -124,6 +133,7 @@ class MainActivity : AppCompatActivity() {
         tvStatus.text = "Getting large token..."
         btnLogin.isEnabled = false
         btnLargeToken.isEnabled = false
+        btnLargeTokenSecure.isEnabled = false
 
         lifecycleScope.launch {
             try {
@@ -146,9 +156,59 @@ class MainActivity : AppCompatActivity() {
             } finally {
                 btnLogin.isEnabled = true
                 btnLargeToken.isEnabled = true
+                btnLargeTokenSecure.isEnabled = true
             }
         }
     }
+
+    private fun performLargeTokenLoginSecure() {
+        val ipAddress = etIpAddress.text.toString().trim()
+        val username = etUsername.text.toString().trim()
+        val password = etPassword.text.toString().trim()
+
+        if (ipAddress.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        tvStatus.text = "Getting large token..."
+        btnLogin.isEnabled = false
+        btnLargeToken.isEnabled = false
+        btnLargeTokenSecure.isEnabled = false
+
+        lifecycleScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    makeLargeTokenRequest(ipAddress, username, password)
+                }
+
+                if (result != null) {
+                    // Store token in database
+                    if (result.token.length < 5 * 1025 * 1024) {
+                        Log.v("TAG", "Not supposed to reach here")
+                        database.tokenDao().insertToken(TokenEntity(token = result.token))
+                        tvStatus.text = "Large token retrieved! Token stored.\nToken: ${result.token}"
+                        Toast.makeText(this@MainActivity, "Large JWT Token stored in database", Toast.LENGTH_SHORT).show()
+                    }
+                    Log.v("TAG", "Supposed to reach here")
+//                    tvStatus.text = "Large token retrieved! Token is too BIG.\nToken: ${result.token}"
+                    tvStatus.text = "Large token retrieved! Token is too BIG.\n"
+                    Toast.makeText(this@MainActivity, "Large JWT Token detected, did not store in database", Toast.LENGTH_SHORT).show()
+                } else {
+                    tvStatus.text = "Large token request failed"
+                    Toast.makeText(this@MainActivity, "Large token request failed", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                tvStatus.text = "Error: ${e.message}"
+                Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            } finally {
+                btnLogin.isEnabled = true
+                btnLargeToken.isEnabled = true
+                btnLargeTokenSecure.isEnabled = true
+            }
+        }
+    }
+
 
     private fun makeLoginRequest(ipAddress: String, username: String, password: String): LoginResponse? {
         val url = "http://$ipAddress/login"
