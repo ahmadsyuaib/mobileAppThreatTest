@@ -1,6 +1,9 @@
 package com.example.bruteforceapp
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -28,6 +31,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BruteForceScreen() {
     val context = LocalContext.current
+
+    var breakthrough by remember { mutableStateOf<String?>(null) }
+
+    // 🔹 Register BroadcastReceiver once
+    DisposableEffect(Unit) {
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(ctx: Context?, intent: Intent?) {
+                if (intent?.action == "com.example.bruteforceapp.BREAKTHROUGH") {
+                    breakthrough = intent.getStringExtra("password")
+                }
+            }
+        }
+        val filter = IntentFilter("com.example.bruteforceapp.BREAKTHROUGH")
+        context.registerReceiver(receiver, filter)
+
+        onDispose {
+            context.unregisterReceiver(receiver)
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -113,5 +136,21 @@ fun BruteForceScreen() {
                 Text("Monitor LogCat for real-time progress and results.", style = MaterialTheme.typography.bodySmall)
             }
         }
+
+        breakthrough?.let { pwd ->
+            Spacer(modifier = Modifier.height(24.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                Text(
+                    text = "🎉 BREAKTHROUGH! Found password: $pwd",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
+
+        }
     }
+
 }
