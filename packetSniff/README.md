@@ -23,16 +23,16 @@
     ```
 -   Client-side
     -   Use gradle to generate a debug-apk:
-        `bash
-./gradlew clean assembleRelease
-`
+        ```bash
+            ./gradlew clean assembleRelease
+        ```
         -Side load the apk into an android phone
     -   Connect using the same wifi as the device that is hosting the server
     -   Send in details
         -   email: `test@example.com`
         -   password: `password123`
 -   Load wireshark
-    -   Start listening to packets in a Wifi
+    -   Start listening to packets in "Adapter for loopback traffic capture"
     -   Filter for ports 3000 and 3001
     -   HTTP request should be plaintext
 
@@ -41,6 +41,6 @@
 ### Control 1: Use HTTPS to encrypt HTTP requests
 
 -   Load wireshark
-    -   Start listening to packets in a Wifi
+    -   Start listening to packets in "Adapter for loopback traffic capture"
     -   Filter for ports 3000 and 3001
     -   HTTPS request should be encrypted

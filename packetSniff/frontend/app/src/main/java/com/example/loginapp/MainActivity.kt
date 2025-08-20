@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         // Use 10.0.2.2 for Android emulator (maps to localhost)
         // Use your actual IP address if testing on real device
-        val url = "$protocol://<INSERT IP ADDRESS HERE>:${if (protocol == "https") "3001" else "3000"}/login"
+        val url = "$protocol://10.0.2.2:${if (protocol == "https") "3001" else "3000"}/login"
 
         val formBody = FormBody.Builder()
             .add("email", email)
