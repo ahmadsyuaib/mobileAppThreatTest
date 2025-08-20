@@ -36,7 +36,7 @@ class AutoFillAccessibilityService : AccessibilityService() {
     """
 
     private val hardcodedCredentials = mapOf(
-        "ip_address" to "192.168.1.50:5000",
+        "ip_address" to "10.0.66.31:5000",
         "username" to "test"
     )
 
