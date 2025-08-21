@@ -12,24 +12,12 @@ import {
 } from "react-native";
 
 const App = () => {
-    const [host, setHost] = useState("mydatabase.192.168.1.100:3000");
+    const [host, setHost] = useState("mydatabase");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("");
-
-    // Helper function to extract IP and port from host
-    const getServerUrl = (hostString) => {
-        // Extract everything after the first dot (e.g., "mydatabase.192.168.1.100:3000" -> "192.168.1.100:3000")
-        const parts = hostString.split(".");
-        if (parts.length < 2) {
-            // If no dot found, assume the whole string is IP:port
-            return `http://${hostString}`;
-        }
-        // Join everything after the first part
-        const serverPart = parts.slice(1).join(".");
-        return `http://${serverPart}`;
-    };
+    const [ip, setIp] = useState("10.0.66.31:3000");
 
     const sendAuthRequest = async () => {
         if (!host.trim() || !username.trim() || !password.trim()) {
@@ -41,15 +29,64 @@ const App = () => {
         setResponse("");
 
         try {
-            const serverUrl = getServerUrl(host);
-
-            const trimmed_host = host.trim(".");
+            const serverUrl = "http://" + ip;
 
             const response = await fetch(`${serverUrl}/api/auth`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    host: trimmed_host[0], // Custom host header as requested
+                    host: host.trim(),
+                },
+                body: JSON.stringify({
+                    username: username.trim(),
+                    password: password.trim(),
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setResponse(
+                    `Success! User added:\n${JSON.stringify(data, null, 2)}`
+                );
+                Alert.alert("Success", "User added successfully!");
+                // Clear form
+                setUsername("");
+                setPassword("");
+            } else {
+                setResponse(`Error: ${data.error}\n${data.message}`);
+                Alert.alert("Error", data.message || "Something went wrong");
+            }
+        } catch (error) {
+            const errorMessage = `Network error: ${error.message}`;
+            setResponse(errorMessage);
+            Alert.alert(
+                "Network Error",
+                "Could not connect to server. Make sure your server is running."
+            );
+            console.error("Request failed:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const sendAuthRequestSafely = async () => {
+        if (!host.trim() || !username.trim() || !password.trim()) {
+            Alert.alert("Error", "Please fill in all fields");
+            return;
+        }
+
+        setLoading(true);
+        setResponse("");
+
+        try {
+            const serverUrl = "https://" + ip;
+
+            const response = await fetch(`${serverUrl}/api/auth`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    host: host.trim(),
                 },
                 body: JSON.stringify({
                     username: username.trim(),
@@ -93,7 +130,7 @@ const App = () => {
         setLoading(true);
 
         try {
-            const serverUrl = getServerUrl(host);
+            const serverUrl = `http://${ip}`;
 
             const response = await fetch(`${serverUrl}/api/create-database`, {
                 method: "POST",
@@ -165,7 +202,7 @@ const App = () => {
             <ScrollView contentContainerStyle={styles.scrollContent}>
                 <Text style={styles.title}>Mini Supabase Client</Text>
 
-                <View style={styles.section}>
+                {/* <View style={styles.section}>
                     <Text style={styles.sectionTitle}>
                         Server Configuration
                     </Text>
@@ -178,9 +215,9 @@ const App = () => {
                             Test Connection
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
-                <View style={styles.section}>
+                {/* <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Database Setup</Text>
 
                     <Text style={styles.label}>Host (Database Identifier)</Text>
@@ -200,7 +237,7 @@ const App = () => {
                             Create Database
                         </Text>
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Add User</Text>
@@ -234,7 +271,26 @@ const App = () => {
                         {loading ? (
                             <ActivityIndicator color="#white" />
                         ) : (
-                            <Text style={styles.buttonText}>Send Request</Text>
+                            <Text style={styles.buttonText}>
+                                Send Request with HTTP
+                            </Text>
+                        )}
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={[
+                            styles.button,
+                            loading && styles.buttonDisabled,
+                        ]}
+                        onPress={sendAuthRequestSafely}
+                        disabled={loading}
+                    >
+                        {loading ? (
+                            <ActivityIndicator color="#white" />
+                        ) : (
+                            <Text style={styles.buttonText}>
+                                Send Request with HTTPS
+                            </Text>
                         )}
                     </TouchableOpacity>
                 </View>
