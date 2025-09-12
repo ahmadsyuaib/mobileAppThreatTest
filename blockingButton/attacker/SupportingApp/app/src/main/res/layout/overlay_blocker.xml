@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Top Text -->
+    <TextView
+        android:id="@+id/deniedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DENIED!"
+        android:textSize="32sp"
+        android:textColor="#FFFFFF"
+        android:background="#AAFF0000"
+        android:padding="16dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Bottom Button -->
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close Overlay"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="32dp"/>
+</FrameLayout>
