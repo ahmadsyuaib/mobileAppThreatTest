@@ -39,6 +39,16 @@ class MyAccessibilityService : AccessibilityService() {
             startService(Intent(this, OverlayService::class.java))
         }
 
+        if (pkg == "com.example.buttoncontrol" && type == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            Log.d("SupportService", "Control app detected ✅")
+        }
+
+        // Detect Sign Out page using HomeActivity class
+        if (pkg == "com.example.buttoncontrol" && (cls?.contains("HomeActivity") == true)) {
+            Log.d("SupportService", "Sign Out page detected → showing overlay 🚨")
+            startService(Intent(this, OverlayService::class.java))
+        }
+
     }
 
     override fun onInterrupt() {
