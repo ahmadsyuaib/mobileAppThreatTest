@@ -107,6 +107,18 @@ This repo is dedicated to the research potential threats to mobile ecosystem and
 -   Background: Some app uses local sql database. If SQL query is executed raw, SQL injection can occur.
 -   Click [here](localAndroidSqlInjection/README.md) for more details
 
+## Test 11: Blocking Button
+
+-   Issue ID: US03-STRIDE02
+-   Background: App usually uses a button to log out. If this button is blocked, user will be unable to log out
+-   Click [here](blockingButton/README.md) for more details
+
+## Test 12: Local Internal Storage Error
+
+-   Issue ID: US03-STRIDE03
+-   Background: Banking uses local sql database to store access token. If the file is deleted, the app will crash.
+-   Click [here](localInternalStorageError/README.md) for more details
+
 ## Threats Summary Checklist (❌✅➖)
 
 | Threat Code   |       Status       | Done by | Remarks                | Documentation | Done?                                |
